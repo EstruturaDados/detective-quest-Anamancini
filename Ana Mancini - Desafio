@@ -1,0 +1,63 @@
+struct Sala {
+    char nome[30];
+    struct Sala *esq;
+    struct Sala *dir;
+};
+
+struct Sala* criarSala(char nome[]) {
+    struct Sala* nova = (struct Sala*) malloc(sizeof(struct Sala));
+
+    strcpy(nova->nome, nome);
+
+    nova->esq = NULL;
+    nova->dir = NULL;
+
+    return nova;
+}
+
+int main() {
+
+    struct Sala *entrada = criarSala("Entrada");
+    struct Sala *floresta = criarSala("Floresta");
+    struct Sala *caverna = criarSala("Caverna");
+    struct Sala *rio = criarSala("Rio");
+    struct Sala *montanha = criarSala("Montanha");
+    struct Sala *tesouro = criarSala("Tesouro");
+
+entrada->esq = floresta;
+entrada->dir = caverna;
+
+floresta->esq = rio;
+floresta->dir = montanha;
+
+caverna->dir = tesouro;
+
+
+struct Sala *atual = entrada;
+
+char escolha;
+
+printf("Você está em: %s\n", atual->nome);
+while (1) {
+    printf("Você está em: %s\n", atual->nome);
+    printf("Deseja ir para (e) esquerda, (d) direita ou (s) sair? ");
+    scanf(" %c", &escolha);
+
+    if (escolha == 's') {
+        printf("Saindo da aventura...\n");
+        break;
+    }
+
+    if (escolha == 'e') {
+    if (atual->esq != NULL) {
+        atual = atual->esq;
+    } else {
+        printf("Não há caminho para a esquerda!\n");
+    }
+}
+
+}
+
+return 0;
+}
+
